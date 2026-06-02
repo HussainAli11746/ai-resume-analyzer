@@ -300,7 +300,14 @@ ALL text color must be #000 or #111. NO blue, teal, gray, or accent colors.
 async function generatePdfFromHtml(htmlContent) {
     const browser = await puppeteer.launch({
         headless: true,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
+        args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+            "--single-process"
+        ]
     });
     const page = await browser.newPage();
 
