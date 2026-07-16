@@ -1,6 +1,5 @@
 const { GoogleGenAI } = require("@google/genai");
 const z = require("zod");
-const puppeteer = require("puppeteer");
 
 const MODEL = "gemini-3.6-flash";
 
@@ -297,17 +296,33 @@ ALL text color must be #000 or #111. NO blue, teal, gray, or accent colors.
     return parsed;
 }
 
+async function getBrowserInstance() {
+    if (process.env.NODE_ENV === "production" || process.platform === "linux") {
+        const chromium = require("@sparticuz/chromium");
+        const puppeteerCore = require("puppeteer-core");
+        return await puppeteerCore.launch({
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(),
+            headless: chromium.headless,
+        });
+    } else {
+        const puppeteer = require("puppeteer");
+        return await puppeteer.launch({
+            headless: true,
+            args: [
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+                "--single-process"
+            ]
+        });
+    }
+}
+
 async function generatePdfFromHtml(htmlContent) {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-gpu",
-            "--single-process"
-        ]
-    });
+    const browser = await getBrowserInstance();
     const page = await browser.newPage();
 
     // Set viewport to exact A4 pixel dimensions (96 DPI: 210mm x 297mm)
