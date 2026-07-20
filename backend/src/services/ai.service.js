@@ -297,16 +297,30 @@ ALL text color must be #000 or #111. NO blue, teal, gray, or accent colors.
 }
 
 async function getBrowserInstance() {
-    if (process.env.NODE_ENV === "production" || process.platform === "linux") {
-        const chromium = require("@sparticuz/chromium");
-        const puppeteerCore = require("puppeteer-core");
-        return await puppeteerCore.launch({
-            args: chromium.args,
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(),
-            headless: chromium.headless,
-        });
-    } else {
+    let lastError = null;
+
+    // Strategy 1: Try @sparticuz/chromium for Linux cloud environment
+    if (process.platform === "linux" || process.env.NODE_ENV === "production") {
+        try {
+            const chromium = require("@sparticuz/chromium");
+            const puppeteerCore = require("puppeteer-core");
+            const execPath = await chromium.executablePath();
+            console.log("🚀 Attempting launch with @sparticuz/chromium at:", execPath);
+            return await puppeteerCore.launch({
+                args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+                defaultViewport: chromium.defaultViewport,
+                executablePath: execPath,
+                headless: chromium.headless,
+            });
+        } catch (err) {
+            console.warn("⚠️ @sparticuz/chromium launch failed:", err.message);
+            lastError = err;
+        }
+    }
+
+    // Strategy 2: Standard Puppeteer launch
+    try {
+        console.log("🚀 Attempting launch with standard Puppeteer...");
         const puppeteer = require("puppeteer");
         return await puppeteer.launch({
             headless: true,
@@ -318,7 +332,12 @@ async function getBrowserInstance() {
                 "--single-process"
             ]
         });
+    } catch (err) {
+        console.warn("⚠️ Standard Puppeteer launch failed:", err.message);
+        lastError = err;
     }
+
+    throw new Error(`PDF Generation Error: Unable to launch browser on server (${lastError ? lastError.message : "Unknown error"})`);
 }
 
 async function generatePdfFromHtml(htmlContent) {
