@@ -71,6 +71,19 @@ const ReportPage = () => {
             "AI Token Limit Reached! Gemini AI is taking a short nap. Please try again in 1-2 minutes! 🤖💤"
         );
         setShowRateLimitModal(true);
+      } else if (currentReport.tailoredResumeHtml) {
+        // Fallback: If backend Puppeteer fails on cloud host, open styled HTML resume for instant PDF print/save
+        const printWin = window.open("", "_blank");
+        if (printWin) {
+          printWin.document.write(currentReport.tailoredResumeHtml);
+          printWin.document.close();
+          printWin.focus();
+          setTimeout(() => {
+            printWin.print();
+          }, 400);
+        } else {
+          alert("Please allow popups to save your resume PDF.");
+        }
       } else {
         alert("Failed to download PDF. Please try again.");
       }
