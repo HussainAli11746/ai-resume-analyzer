@@ -71,18 +71,6 @@ const ReportPage = () => {
             "AI Token Limit Reached! Gemini AI is taking a short nap. Please try again in 1-2 minutes! 🤖💤"
         );
         setShowRateLimitModal(true);
-      } else if (currentReport.tailoredResumeHtml) {
-        // Direct download of styled tailored resume file without opening any new tab
-        const fileName = `${(currentReport.candidateName || currentReport.title || "Resume").replace(/[^a-zA-Z0-0_-]/g, "_")}_Tailored.html`;
-        const blob = new Blob([currentReport.tailoredResumeHtml], { type: "text/html" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
       } else {
         alert("Failed to download PDF. Please try again.");
       }

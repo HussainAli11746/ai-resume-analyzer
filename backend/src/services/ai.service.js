@@ -299,8 +299,38 @@ ALL text color must be #000 or #111. NO blue, teal, gray, or accent colors.
 async function getBrowserInstance() {
     let lastError = null;
 
-    // Strategy 1: Standard Puppeteer (uses .puppeteerrc.cjs cache in node_modules)
+    // Strategy 1: @sparticuz/chromium (for Linux cloud environments like Render)
+    if (process.platform === "linux" || process.env.NODE_ENV === "production") {
+        try {
+            const chromium = require("@sparticuz/chromium");
+            const puppeteerCore = require("puppeteer-core");
+
+            let execPath;
+            if (typeof chromium.executablePath === "function") {
+                execPath = await chromium.executablePath();
+            } else if (typeof chromium.executablePath === "string") {
+                execPath = chromium.executablePath;
+            } else {
+                execPath = await chromium.executablePath;
+            }
+
+            console.log("🚀 Launching @sparticuz/chromium with executable path:", execPath);
+
+            return await puppeteerCore.launch({
+                args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+                defaultViewport: chromium.defaultViewport,
+                executablePath: execPath,
+                headless: chromium.headless ?? true,
+            });
+        } catch (err) {
+            console.warn("⚠️ @sparticuz/chromium launch failed:", err.message);
+            lastError = err;
+        }
+    }
+
+    // Strategy 2: Standard Puppeteer launch
     try {
+        console.log("🚀 Launching standard Puppeteer...");
         const puppeteer = require("puppeteer");
         return await puppeteer.launch({
             headless: true,
@@ -314,24 +344,6 @@ async function getBrowserInstance() {
         });
     } catch (err) {
         console.warn("⚠️ Standard Puppeteer launch failed:", err.message);
-        lastError = err;
-    }
-
-    // Strategy 2: @sparticuz/chromium fallback
-    try {
-        const chromium = require("@sparticuz/chromium");
-        const puppeteerCore = require("puppeteer-core");
-        const execPath = await chromium.executablePath();
-        if (execPath) {
-            return await puppeteerCore.launch({
-                args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
-                defaultViewport: chromium.defaultViewport,
-                executablePath: execPath,
-                headless: chromium.headless,
-            });
-        }
-    } catch (err) {
-        console.warn("⚠️ @sparticuz/chromium launch failed:", err.message);
         lastError = err;
     }
 
