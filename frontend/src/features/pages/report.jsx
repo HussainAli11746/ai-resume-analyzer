@@ -72,18 +72,17 @@ const ReportPage = () => {
         );
         setShowRateLimitModal(true);
       } else if (currentReport.tailoredResumeHtml) {
-        // Fallback: If backend Puppeteer fails on cloud host, open styled HTML resume for instant PDF print/save
-        const printWin = window.open("", "_blank");
-        if (printWin) {
-          printWin.document.write(currentReport.tailoredResumeHtml);
-          printWin.document.close();
-          printWin.focus();
-          setTimeout(() => {
-            printWin.print();
-          }, 400);
-        } else {
-          alert("Please allow popups to save your resume PDF.");
-        }
+        // Direct download of styled tailored resume file without opening any new tab
+        const fileName = `${(currentReport.candidateName || currentReport.title || "Resume").replace(/[^a-zA-Z0-0_-]/g, "_")}_Tailored.html`;
+        const blob = new Blob([currentReport.tailoredResumeHtml], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
       } else {
         alert("Failed to download PDF. Please try again.");
       }
