@@ -296,19 +296,22 @@ ALL text color must be #000 or #111. NO blue, teal, gray, or accent colors.
     return parsed;
 }
 
+const isProduction = process.env.NODE_ENV === "production" || Boolean(process.env.RENDER) || process.platform === "linux";
+
 async function getBrowserInstance() {
-    let lastError = null;
+    if (isProduction) {
+        const puppeteer = require("puppeteer-core");
+        const chromium = require("@sparticuz/chromium");
 
-    // Ensure Puppeteer cache directory is explicitly pointed to node_modules/.cache/puppeteer
-    const path = require("path");
-    if (!process.env.PUPPETEER_CACHE_DIR) {
-        process.env.PUPPETEER_CACHE_DIR = path.join(__dirname, "..", "..", "node_modules", ".cache", "puppeteer");
-    }
-
-    // Strategy 1: Standard Puppeteer (uses PUPPETEER_CACHE_DIR in node_modules)
-    try {
-        console.log("🚀 Launching standard Puppeteer with cache dir:", process.env.PUPPETEER_CACHE_DIR);
+        return await puppeteer.launch({
+            executablePath: await chromium.executablePath(),
+            args: chromium.args,
+            headless: chromium.headless,
+            defaultViewport: chromium.defaultViewport
+        });
+    } else {
         const puppeteer = require("puppeteer");
+
         return await puppeteer.launch({
             headless: true,
             args: [
@@ -319,44 +322,7 @@ async function getBrowserInstance() {
                 "--single-process"
             ]
         });
-    } catch (err) {
-        console.warn("⚠️ Standard Puppeteer launch failed:", err.message);
-        lastError = err;
     }
-
-    // Strategy 2: @sparticuz/chromium fallback
-    try {
-        const chromium = require("@sparticuz/chromium");
-        const puppeteerCore = require("puppeteer-core");
-
-        const rawArgs = typeof chromium.args === "function" ? await chromium.args() : (await chromium.args) || [];
-        const chromiumArgs = Array.isArray(rawArgs) ? rawArgs : [];
-
-        let execPath;
-        if (typeof chromium.executablePath === "function") {
-            execPath = await chromium.executablePath();
-        } else if (typeof chromium.executablePath === "string") {
-            execPath = chromium.executablePath;
-        } else {
-            execPath = await chromium.executablePath;
-        }
-
-        console.log("🚀 Launching @sparticuz/chromium with executable path:", execPath);
-
-        if (execPath) {
-            return await puppeteerCore.launch({
-                args: [...chromiumArgs, "--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
-                defaultViewport: chromium.defaultViewport || { width: 794, height: 1123 },
-                executablePath: execPath,
-                headless: true,
-            });
-        }
-    } catch (err) {
-        console.warn("⚠️ @sparticuz/chromium launch failed:", err.message);
-        lastError = err;
-    }
-
-    throw new Error(`PDF Generation Error: Could not launch Chrome on server (${lastError ? lastError.message : "Unknown error"})`);
 }
 
 async function generatePdfFromHtml(htmlContent) {
