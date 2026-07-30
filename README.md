@@ -227,5 +227,5 @@ This project is licensed under the [ISC License](LICENSE).
 ---
 
 <p align="center">
-  Crafted with ❤️ by <b>Hussain Ali</b>
+  Developed & Maintained by <a href="https://github.com/HussainAli11746" target="_blank"><b>Hussain Ali</b></a>
 </p>
