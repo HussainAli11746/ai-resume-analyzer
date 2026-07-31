@@ -41,6 +41,12 @@ const Login = () => {
             <Navbar />
 
             <main className="auth-page-container">
+                <div className="auth-back-row">
+                    <button className="auth-back-btn" onClick={() => navigate("/")}>
+                        <span className="auth-back-arrow">&#8592;</span>
+                        Back to Home
+                    </button>
+                </div>
                 <div className="auth-card">
                     <h1 className="auth-title">Sign In</h1>
                     <p className="auth-subtitle">

@@ -153,6 +153,41 @@
   background-color: #0c0e12;
 }
 
+/* Back Button Row */
+.auth-back-row {
+  width: 100%;
+  max-width: 440px;
+  margin-bottom: 16px;
+}
+
+.auth-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.auth-back-btn:hover {
+  background: rgba(163, 230, 53, 0.08);
+  border-color: rgba(163, 230, 53, 0.4);
+  color: #a3e635;
+  transform: translateX(-2px);
+}
+
+.auth-back-arrow {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .auth-card {
   width: 100%;
   max-width: 440px;
