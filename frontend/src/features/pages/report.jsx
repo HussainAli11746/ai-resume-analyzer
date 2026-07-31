@@ -1,5 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  FileText,
+  Zap,
+  TriangleAlert,
+  CheckCircle2,
+  Sparkles,
+  Rocket,
+  Target,
+  TrendingUp,
+  Mic,
+  Timer,
+  Download,
+  Bot,
+  Coffee,
+  Lightbulb,
+  Link2,
+  Heart,
+  X,
+} from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Logo from "../../components/Logo";
 import { useInterview } from "../hooks/useInterview";
@@ -330,7 +349,7 @@ const ReportPage = () => {
                 </p>
 
                 <div className="filename-box">
-                  <span>📄</span>
+                  <FileText size={14} style={{ display: "inline", verticalAlign: "middle", marginRight: "6px" }} />
                   <span>resume_devanshjha_fin.pdf</span>
                 </div>
               </div>
@@ -364,11 +383,11 @@ const ReportPage = () => {
             {/* CARD 3: QUICK INSIGHTS */}
             <div className="report-insights-card">
               <div className="insights-card-title">
-                ⚡ QUICK INSIGHTS
+                <Zap size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "4px" }} /> QUICK INSIGHTS
               </div>
               <div className="insights-list">
                 <div className="insight-item-box">
-                  <div className="insight-item-icon icon-green">✓</div>
+                  <div className="insight-item-icon icon-green"><CheckCircle2 size={14} /></div>
                   <div>
                     <div className="insight-text-title">ATS Friendly</div>
                     <div className="insight-text-sub">{secScores.atsCompatibility || 92}/100 compatibility score</div>
@@ -376,7 +395,7 @@ const ReportPage = () => {
                 </div>
 
                 <div className="insight-item-box">
-                  <div className="insight-item-icon icon-amber">⚠</div>
+                  <div className="insight-item-icon icon-amber"><TriangleAlert size={14} /></div>
                   <div>
                     <div className="insight-text-title">Some Metrics Missing</div>
                     <div className="insight-text-sub">{secScores.impactAndAchievements || 59}/100 impact score</div>
@@ -384,7 +403,7 @@ const ReportPage = () => {
                 </div>
 
                 <div className="insight-item-box">
-                  <div className="insight-item-icon icon-amber">⚠</div>
+                  <div className="insight-item-icon icon-amber"><TriangleAlert size={14} /></div>
                   <div>
                     <div className="insight-text-title">Keyword Gaps Found</div>
                     <div className="insight-text-sub">{strongKw.length} strong, {missingKw.length} missing</div>
@@ -392,7 +411,7 @@ const ReportPage = () => {
                 </div>
 
                 <div className="insight-item-box">
-                  <div className="insight-item-icon icon-amber">⚠</div>
+                  <div className="insight-item-icon icon-amber"><TriangleAlert size={14} /></div>
                   <div>
                     <div className="insight-text-title">Weak Project Details</div>
                     <div className="insight-text-sub">{secScores.projectQuality || 50}/100 project quality score</div>
@@ -404,8 +423,8 @@ const ReportPage = () => {
             {/* CARD 4: RESUME PREVIEW MOCKUP */}
             <div className="report-preview-card">
               <div className="preview-card-header">
-                <span>📄 RESUME PREVIEW</span>
-                <span style={{ cursor: "pointer" }}>🔗</span>
+                <span><FileText size={14} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} />RESUME PREVIEW</span>
+                <span style={{ cursor: "pointer" }}><Link2 size={14} /></span>
               </div>
 
               <div className="resume-paper-mockup">
@@ -432,7 +451,7 @@ const ReportPage = () => {
             {/* CARD 1: AI SUMMARY */}
             <div className="bottom-card">
               <div className="bottom-card-header card-header-lime">
-                <span>✨ AI Summary</span>
+                <span><Sparkles size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} />AI Summary</span>
               </div>
               <p className="summary-text-p">
                 {currentReport.aiSummary ||
@@ -440,7 +459,7 @@ const ReportPage = () => {
               </p>
 
               <div className="summary-star-box">
-                <span>⭐</span>
+                <span><Sparkles size={14} style={{ color: "#facc15" }} /></span>
                 <span>Implement the suggested improvements to boost your ATS score.</span>
               </div>
             </div>
@@ -448,12 +467,12 @@ const ReportPage = () => {
             {/* CARD 2: STRENGTHS */}
             <div className="bottom-card">
               <div className="bottom-card-header card-header-lime">
-                <span>🚀 Strengths</span>
+                <span><Rocket size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} />Strengths</span>
               </div>
               <div className="bullet-list">
                 {strengthsList.map((item, idx) => (
                   <div key={idx} className="bullet-item">
-                    <span className="bullet-icon-green">✓</span>
+                    <span className="bullet-icon-green"><CheckCircle2 size={14} /></span>
                     <span>{item}</span>
                   </div>
                 ))}
@@ -463,12 +482,12 @@ const ReportPage = () => {
             {/* CARD 3: IMPROVEMENTS */}
             <div className="bottom-card">
               <div className="bottom-card-header card-header-amber">
-                <span>🎯 Improvements</span>
+                <span><Target size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} />Improvements</span>
               </div>
               <div className="bullet-list">
                 {improvementsList.map((item, idx) => (
                   <div key={idx} className="bullet-item">
-                    <span className="bullet-icon-amber">⚠</span>
+                    <span className="bullet-icon-amber"><TriangleAlert size={14} /></span>
                     <span>{item}</span>
                   </div>
                 ))}
@@ -478,7 +497,7 @@ const ReportPage = () => {
             {/* CARD 4: SECTION SCORES */}
             <div className="bottom-card">
               <div className="bottom-card-header card-header-lime">
-                <span>📈 Section Scores</span>
+                <span><TrendingUp size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} />Section Scores</span>
               </div>
               <div className="section-scores-list">
                 <div className="section-score-row">
@@ -549,7 +568,7 @@ const ReportPage = () => {
             {/* LEFT: ATS RISKS CARD (MATCHING REFERENCE IMAGE 1) */}
             <div className="ats-risks-card">
               <div className="card-section-title-amber">
-                ⚠ ATS Risks <span>(Fix These)</span>
+                <TriangleAlert size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} /> ATS Risks <span>(Fix These)</span>
               </div>
 
               {atsRisksList.map((risk, idx) => (
@@ -578,7 +597,7 @@ const ReportPage = () => {
               <h3 className="keywords-card-title">Keywords Analysis</h3>
 
               <div className="pills-group">
-                <div className="pills-group-title strong">🟢 Strong Keywords</div>
+                <div className="pills-group-title strong"><span style={{ color: "#a3e635", fontSize: "0.85rem" }}>●</span> Strong Keywords</div>
                 <div className="pills-subtext">These keywords are already working in your favour</div>
                 <div className="pills-flex-wrap">
                   {strongKw.map((kw, idx) => (
@@ -590,7 +609,7 @@ const ReportPage = () => {
               </div>
 
               <div className="pills-group">
-                <div className="pills-group-title missing">🔴 Missing Keywords</div>
+                <div className="pills-group-title missing"><span style={{ color: "#ef4444", fontSize: "0.85rem" }}>●</span> Missing Keywords</div>
                 <div className="pills-subtext">Add these to improve your ATS match rate</div>
                 <div className="pills-flex-wrap">
                   {missingKw.map((kw, idx) => (
@@ -607,7 +626,7 @@ const ReportPage = () => {
           <div className="interview-prep-component">
             <div className="prep-component-header">
               <h3 className="prep-component-title">
-                🎤 AI Interview Preparation
+                <Mic size={18} style={{ display: "inline", verticalAlign: "middle", marginRight: "7px" }} />AI Interview Preparation
               </h3>
 
               {/* PILL-SHAPED TABS */}
@@ -658,7 +677,7 @@ const ReportPage = () => {
                       >
                         {item.difficulty || "Medium"}
                       </span>
-                      <span className="badge-time">⏱ {item.estimatedTime || "4 min"}</span>
+                      <span className="badge-time"><Timer size={13} style={{ display: "inline", verticalAlign: "middle", marginRight: "3px" }} />{item.estimatedTime || "4 min"}</span>
                     </div>
                   </div>
 
@@ -671,7 +690,7 @@ const ReportPage = () => {
           {/* SLEEK COMPACT PRE-FOOTER BANNER BAR */}
           <div className="sleek-cta-bar">
             <div className="sleek-cta-left">
-              <div className="sleek-cta-icon-circle">⚡</div>
+              <div className="sleek-cta-icon-circle"><Zap size={18} /></div>
               <div>
                 <h4 className="sleek-cta-title">Ready to improve your ATS score?</h4>
                 <p className="sleek-cta-sub">Download your tailored PDF resume or upload an improved version to rescan.</p>
@@ -680,7 +699,7 @@ const ReportPage = () => {
 
             <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
               <button className="btn-sleek-reanalyze" onClick={handleDownloadPdf} disabled={downloading}>
-                {downloading ? "Generating PDF..." : "📥 Download Tailored PDF Resume"}
+                {downloading ? "Generating PDF..." : <><Download size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} />Download Tailored PDF Resume</>}
               </button>
               <button
                 type="button"
@@ -722,11 +741,11 @@ const ReportPage = () => {
                 >
                   {activeQuestionModal.difficulty || "Medium"}
                 </span>
-                <span className="badge-time">⏱ {activeQuestionModal.estimatedTime || "4 min"}</span>
+                <span className="badge-time"><Timer size={13} style={{ display: "inline", verticalAlign: "middle", marginRight: "3px" }} />{activeQuestionModal.estimatedTime || "4 min"}</span>
               </div>
 
               <button className="modal-close-btn" onClick={() => setActiveQuestionModal(null)}>
-                ✕
+                <X size={16} />
               </button>
             </div>
 
@@ -748,7 +767,7 @@ const ReportPage = () => {
 
               {activeQuestionModal.proTip && (
                 <div className="q-protip-block">
-                  <div className="q-protip-label">💡 PRO TIP</div>
+                  <div className="q-protip-label"><Lightbulb size={13} style={{ display: "inline", verticalAlign: "middle", marginRight: "4px" }} />PRO TIP</div>
                   <div className="q-protip-text">{activeQuestionModal.proTip}</div>
                 </div>
               )}
@@ -789,7 +808,7 @@ const ReportPage = () => {
               </div>
 
               <button className="modal-close-btn" onClick={() => setActiveRiskModal(null)}>
-                ✕
+                <X size={16} />
               </button>
             </div>
 
@@ -803,7 +822,7 @@ const ReportPage = () => {
               </div>
 
               <div className="q-section-block" style={{ background: "rgba(163, 230, 53, 0.08)", border: "1px solid rgba(163, 230, 53, 0.25)", borderRadius: "14px", padding: "18px" }}>
-                <div className="q-block-label" style={{ color: "#a3e635", marginBottom: "6px" }}>💡 RECOMMENDED ACTIONABLE FIX</div>
+                <div className="q-block-label" style={{ color: "#a3e635", marginBottom: "6px" }}><Lightbulb size={13} style={{ display: "inline", verticalAlign: "middle", marginRight: "4px" }} />RECOMMENDED ACTIONABLE FIX</div>
                 <div style={{ color: "#ffffff", fontSize: "0.96rem", lineHeight: "1.65", fontWeight: "600" }}>
                   {activeRiskModal.fixRecommendation}
                 </div>
@@ -841,14 +860,14 @@ const ReportPage = () => {
         <div className="modal-overlay" style={{ zIndex: 1200 }}>
           <div className="rate-limit-card">
             <div className="rate-limit-badge">AI TOKEN LIMIT REACHED</div>
-            <div className="rate-limit-icon">🤖💤</div>
+            <div className="rate-limit-icon"><Bot size={40} style={{ color: "#a3e635" }} /></div>
             <h3 className="rate-limit-title">Gemini AI Needs a Quick Power Nap!</h3>
             <p className="rate-limit-desc">
               {rateLimitMessage ||
-                "Google AI free tier request limits have been reached for a moment. Please wait 1 to 2 minutes while Gemini recharges its batteries! ✨"}
+                "Google AI free tier request limits have been reached for a moment. Please wait 1 to 2 minutes while Gemini recharges its batteries!"}
             </p>
             <div className="rate-limit-timer-pill">
-              <span className="timer-icon">⏳</span>
+              <span className="timer-icon"><Timer size={16} /></span>
               <span>Resetting in ~60 seconds...</span>
             </div>
             <button
@@ -856,7 +875,7 @@ const ReportPage = () => {
               style={{ marginTop: "1.2rem", width: "100%" }}
               onClick={() => setShowRateLimitModal(false)}
             >
-              Got It! I'll Try Again Soon ☕
+              <Coffee size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} />Got It! I'll Try Again Soon
             </button>
           </div>
         </div>
@@ -868,7 +887,7 @@ const ReportPage = () => {
           <Logo />
           <span className="footer-dot">•</span>
           <p className="footer-copyright">
-            © 2026 AI Placement Copilot. Built with ❤️ for students, graduates, and professionals.
+            © 2026 AI Placement Copilot. Built with <Heart size={13} style={{ display: "inline", verticalAlign: "middle", color: "#f87171" }} /> for students, graduates, and professionals.
           </p>
         </div>
       </footer>

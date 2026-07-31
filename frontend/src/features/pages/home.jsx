@@ -1,5 +1,24 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  Zap,
+  Target,
+  ShieldCheck,
+  FileText,
+  Lightbulb,
+  KeyRound,
+  Sparkles,
+  Mic,
+  PartyPopper,
+  Clock3,
+  Upload,
+  X,
+  Bot,
+  Coffee,
+  Timer,
+  ChevronRight,
+  Heart,
+} from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Logo from "../../components/Logo";
 import { useAuth } from "../hooks/useAuth";
@@ -181,7 +200,7 @@ const Home = () => {
           {/* LEFT COLUMN */}
           <div className="hero-left">
             <div className="hero-badge">
-              ⚡ AI-Powered • ATS Optimized
+              <Zap size={13} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} /> AI-Powered • ATS Optimized
             </div>
 
             <h1 className="hero-heading">
@@ -201,15 +220,15 @@ const Home = () => {
 
             <div className="hero-trust-stats">
               <div className="hero-stat-item">
-                <div className="hero-stat-title">⚡ Under 10 Seconds</div>
+                <div className="hero-stat-title"><Zap size={14} style={{ display: "inline", verticalAlign: "middle", marginRight: "4px" }} /> Under 10 Seconds</div>
                 <div className="hero-stat-desc">Average analysis time</div>
               </div>
               <div className="hero-stat-item">
-                <div className="hero-stat-title">🎯 ATS Optimized</div>
+                <div className="hero-stat-title"><Target size={14} style={{ display: "inline", verticalAlign: "middle", marginRight: "4px" }} /> ATS Optimized</div>
                 <div className="hero-stat-desc">Built for modern hiring systems</div>
               </div>
               <div className="hero-stat-item">
-                <div className="hero-stat-title">🔒 Privacy First</div>
+                <div className="hero-stat-title"><ShieldCheck size={14} style={{ display: "inline", verticalAlign: "middle", marginRight: "4px" }} /> Privacy First</div>
                 <div className="hero-stat-desc">Your files stay secure</div>
               </div>
             </div>
@@ -247,11 +266,11 @@ const Home = () => {
 
                   {user ? (
                     <button className="btn-scan-action" onClick={() => setIsModalOpen(true)}>
-                      ⚡ Analyze Resume Now →
+                      <Zap size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} /> Analyze Resume Now →
                     </button>
                   ) : (
                     <button className="btn-scan-action" onClick={() => navigate("/login")}>
-                      🛡️ Login to Scan
+                      <ShieldCheck size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} /> Login to Scan
                     </button>
                   )}
 
@@ -268,13 +287,13 @@ const Home = () => {
                   onClick={() => document.getElementById("resume-upload-input")?.click()}
                 >
                   <div className="upload-pdf-icon-graphic">
-                    <span className="sparkle-badge">✨</span>
+                    <span className="sparkle-badge"><Sparkles size={14} /></span>
                     <span className="pdf-label-badge">PDF</span>
                   </div>
                   <h3 className="dropzone-title">Drag & drop your resume here</h3>
                   <p className="dropzone-sub">or click to browse</p>
                   <button className="btn-browse" type="button">
-                    <span>↑</span> Upload Resume
+                    <Upload size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} /> Upload Resume
                   </button>
                   <div className="dropzone-supported-formats">Supported formats: PDF, DOCX • Max 10MB</div>
 
@@ -307,7 +326,7 @@ const Home = () => {
         <section className="cta-banner-section" style={{ marginTop: "20px", marginBottom: "40px" }}>
           <div className="cta-banner-card" style={{ borderColor: "#a3e635" }}>
             <div className="hero-badge" style={{ background: "rgba(163, 230, 53, 0.15)" }}>
-              🎉 Report Generated Successfully!
+              <PartyPopper size={13} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} /> Report Generated Successfully!
             </div>
             <h2 className="cta-title">
               ATS Match Score: <span style={{ color: "#a3e635" }}>{generatedReport.atsScore || generatedReport.matchScore || "85"}%</span>
@@ -352,13 +371,13 @@ const Home = () => {
                   onClick={() => !isGenerating && setIsModalOpen(false)}
                   disabled={isGenerating}
                 >
-                  ✕
+                  <X size={16} />
                 </button>
               </div>
 
               {selectedFile && (
                 <div className="modal-file-pill">
-                  <span>📄 {selectedFile.name}</span>
+                  <span><FileText size={14} style={{ display: "inline", verticalAlign: "middle", marginRight: "4px" }} />{selectedFile.name}</span>
                   <span>({selectedFile.size})</span>
                 </div>
               )}
@@ -409,7 +428,7 @@ const Home = () => {
                     Cancel
                   </button>
                   <button type="submit" className="btn-modal-submit" disabled={isGenerating}>
-                    {isGenerating ? "Analyzing Resume..." : "⚡ Generate Report"}
+                    {isGenerating ? "Analyzing Resume..." : <><Zap size={14} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} />Generate Report</>}
                   </button>
                 </div>
               </form>
@@ -424,7 +443,7 @@ const Home = () => {
           <div className="modal-card recent-reports-modal-card" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div>
-                <h3 className="modal-title">📄 Recent Reports</h3>
+                <h3 className="modal-title"><FileText size={18} style={{ display: "inline", verticalAlign: "middle", marginRight: "6px" }} />Recent Reports</h3>
                 <p className="modal-subtitle">
                   Select a report to view your ATS breakdown & interview preparation. (Max 5 saved)
                 </p>
@@ -434,7 +453,7 @@ const Home = () => {
                 className="modal-close-btn"
                 onClick={() => setIsRecentReportsModalOpen(false)}
               >
-                ✕
+                <X size={16} />
               </button>
             </div>
 
@@ -498,7 +517,7 @@ const Home = () => {
           <div className="features-marquee-track">
             {/* FIRST SET */}
             <div className="feature-card">
-              <div className="feature-icon-wrapper">🎯</div>
+              <div className="feature-icon-wrapper"><Target size={26} /></div>
               <h3 className="feature-title">ATS Score</h3>
               <p className="feature-desc">
                 Measure how well your resume performs with Applicant Tracking Systems using detailed section-wise scoring.
@@ -506,7 +525,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">📄</div>
+              <div className="feature-icon-wrapper"><FileText size={26} /></div>
               <h3 className="feature-title">Job Match Analysis</h3>
               <p className="feature-desc">
                 Compare your resume against a target job description and discover missing skills, keywords, and requirements.
@@ -514,7 +533,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">💡</div>
+              <div className="feature-icon-wrapper"><Lightbulb size={26} /></div>
               <h3 className="feature-title">AI Recommendations</h3>
               <p className="feature-desc">
                 Receive personalized suggestions to improve projects, skills, formatting, and overall resume quality.
@@ -522,7 +541,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">🔑</div>
+              <div className="feature-icon-wrapper"><KeyRound size={26} /></div>
               <h3 className="feature-title">Keyword Intelligence</h3>
               <p className="feature-desc">
                 Identify strong keywords, uncover missing ones, and improve your recruiter match score.
@@ -530,7 +549,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">✨</div>
+              <div className="feature-icon-wrapper"><Sparkles size={26} /></div>
               <h3 className="feature-title">ATS-Friendly Resume</h3>
               <p className="feature-desc">
                 Generate a professionally formatted, ATS-optimized PDF with AI-powered improvements.
@@ -538,7 +557,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">🎤</div>
+              <div className="feature-icon-wrapper"><Mic size={26} /></div>
               <h3 className="feature-title">Interview Preparation</h3>
               <p className="feature-desc">
                 Get personalized technical, behavioral, and HR interview questions based on your resume and target role.
@@ -547,7 +566,7 @@ const Home = () => {
 
             {/* DUPLICATE CLONE SET FOR SEAMLESS INFINITE LOOP */}
             <div className="feature-card">
-              <div className="feature-icon-wrapper">🎯</div>
+              <div className="feature-icon-wrapper"><Target size={26} /></div>
               <h3 className="feature-title">ATS Score</h3>
               <p className="feature-desc">
                 Measure how well your resume performs with Applicant Tracking Systems using detailed section-wise scoring.
@@ -555,7 +574,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">📄</div>
+              <div className="feature-icon-wrapper"><FileText size={26} /></div>
               <h3 className="feature-title">Job Match Analysis</h3>
               <p className="feature-desc">
                 Compare your resume against a target job description and discover missing skills, keywords, and requirements.
@@ -563,7 +582,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">💡</div>
+              <div className="feature-icon-wrapper"><Lightbulb size={26} /></div>
               <h3 className="feature-title">AI Recommendations</h3>
               <p className="feature-desc">
                 Receive personalized suggestions to improve projects, skills, formatting, and overall resume quality.
@@ -571,7 +590,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">🔑</div>
+              <div className="feature-icon-wrapper"><KeyRound size={26} /></div>
               <h3 className="feature-title">Keyword Intelligence</h3>
               <p className="feature-desc">
                 Identify strong keywords, uncover missing ones, and improve your recruiter match score.
@@ -579,7 +598,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">✨</div>
+              <div className="feature-icon-wrapper"><Sparkles size={26} /></div>
               <h3 className="feature-title">ATS-Friendly Resume</h3>
               <p className="feature-desc">
                 Generate a professionally formatted, ATS-optimized PDF with AI-powered improvements.
@@ -587,7 +606,7 @@ const Home = () => {
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon-wrapper">🎤</div>
+              <div className="feature-icon-wrapper"><Mic size={26} /></div>
               <h3 className="feature-title">Interview Preparation</h3>
               <p className="feature-desc">
                 Get personalized technical, behavioral, and HR interview questions based on your resume and target role.
@@ -637,7 +656,7 @@ const Home = () => {
       <section className="cta-banner-section">
         <div className="cta-banner-card">
           <div className="hero-badge" style={{ marginBottom: "16px" }}>
-            ⚡ AI-Powered • ATS Optimized
+            <Zap size={13} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} /> AI-Powered • ATS Optimized
           </div>
           <h2 className="cta-title">Everything You Need to Build a Better Resume</h2>
           <p className="cta-sub">
@@ -683,14 +702,14 @@ const Home = () => {
         <div className="modal-overlay" style={{ zIndex: 1200 }}>
           <div className="rate-limit-card">
             <div className="rate-limit-badge">AI TOKEN LIMIT REACHED</div>
-            <div className="rate-limit-icon">🤖💤</div>
+            <div className="rate-limit-icon"><Bot size={40} style={{ color: "#a3e635" }} /></div>
             <h3 className="rate-limit-title">Gemini AI Needs a Quick Power Nap!</h3>
             <p className="rate-limit-desc">
               {rateLimitMessage ||
-                "Google AI free tier request limits have been reached for a moment. Please wait 1 to 2 minutes while Gemini recharges its batteries! ✨"}
+                "Google AI free tier request limits have been reached for a moment. Please wait 1 to 2 minutes while Gemini recharges its batteries!"}
             </p>
             <div className="rate-limit-timer-pill">
-              <span className="timer-icon">⏳</span>
+              <span className="timer-icon"><Timer size={16} /></span>
               <span>Resetting in ~60 seconds...</span>
             </div>
             <button
@@ -698,7 +717,7 @@ const Home = () => {
               style={{ marginTop: "1.2rem", width: "100%" }}
               onClick={() => setShowRateLimitModal(false)}
             >
-              Got It! I'll Try Again Soon ☕
+              <Coffee size={15} style={{ display: "inline", verticalAlign: "middle", marginRight: "5px" }} /> Got It! I'll Try Again Soon
             </button>
           </div>
         </div>
@@ -710,7 +729,7 @@ const Home = () => {
           <Logo />
           <span className="footer-dot">•</span>
           <p className="footer-copyright">
-            © 2026 AI Placement Copilot. Built with ❤️ for students, graduates, and professionals.
+            © 2026 AI Placement Copilot. Built with <Heart size={13} style={{ display: "inline", verticalAlign: "middle", color: "#f87171" }} /> for students, graduates, and professionals.
           </p>
         </div>
       </footer>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
+import { Zap, FileText, ShieldCheck } from "lucide-react";
 import "./auth.css";
 
 export const AiLoadingCard = () => {
@@ -94,7 +95,7 @@ export const AiLoadingCard = () => {
 
       {/* Security Footer */}
       <div className="loading-footer">
-        <span className="lock-icon">⚡</span>
+        <span className="lock-icon"><Zap size={16} /></span>
         <span>Powered by Google Gemini AI 3.6 Flash</span>
       </div>
     </div>
@@ -184,7 +185,7 @@ export const PdfLoadingCard = () => {
 
       {/* Footer */}
       <div className="loading-footer">
-        <span className="lock-icon">📄</span>
+        <span className="lock-icon"><FileText size={16} /></span>
         <span>Single-Page ATS Print Ready PDF</span>
       </div>
     </div>
@@ -263,7 +264,7 @@ const LoadingPage = ({ mode = "login" }) => {
 
             {/* Security Footer */}
             <div className="loading-footer">
-              <span className="lock-icon">🔒</span>
+              <span className="lock-icon"><ShieldCheck size={16} /></span>
               <span>
                 {isRegister
                   ? "Your account is protected with secure encryption."

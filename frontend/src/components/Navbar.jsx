@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { LogOut } from "lucide-react";
 import Logo from "./Logo";
 import { useAuth } from "../features/hooks/useAuth";
 
@@ -88,7 +89,7 @@ export const Navbar = () => {
               textAlign: "center",
             }}
           >
-            <div style={{ fontSize: "2.2rem", marginBottom: "12px" }}>👋</div>
+            <div style={{ fontSize: "2.2rem", marginBottom: "12px" }}><LogOut size={36} style={{ color: "#a3e635" }} /></div>
             <h2 style={{ color: "#f0f6fc", fontSize: "1.25rem", fontWeight: "700", marginBottom: "8px" }}>
               Log out?
             </h2>
