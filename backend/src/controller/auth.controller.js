@@ -38,7 +38,15 @@ async function registerUserController(req, res) {
       maxAge: 24 * 60 * 60 * 1000
     });
 
-    res.status(201).json({ message: "User registered successfully", token });
+    res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+      },
+      token,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

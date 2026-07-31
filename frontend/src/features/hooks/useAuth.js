@@ -25,7 +25,13 @@ export const useAuth = () => {
         setLoading("register");
         try {
             const data = await register({ username, email, password });
-            setUser(data.user);
+            // Use user from register response, or fallback to getMe() if not included
+            if (data.user) {
+                setUser(data.user);
+            } else {
+                const me = await getMe();
+                setUser(me?.user || me);
+            }
             return data;
         }
         catch (error) {
